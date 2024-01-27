@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pak_cricket_team_app/data_store/player_data_store.dart';
-import 'package:pak_cricket_team_app/models/player_model.dart';
+
 import 'package:pak_cricket_team_app/screen/player_history_scren.dart';
+import 'package:pak_cricket_team_app/screen/t20_squad_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,16 +16,67 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PakTeam'),
+        title: const Center(child: Text('PakTeam')),
+        backgroundColor: Colors.green,
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const T20SquadScreen( title:  'T20 Squad',)));
+                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          // Change your radius here
+                          borderRadius: BorderRadius.only(topLeft: Radius.zero),
+                        ),
+                      ),
+                    ),
+                    child: const Text('T20 Squad',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold))),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const T20SquadScreen(title: 'ODI Squad',)));
+                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          // Change your radius here
+                          borderRadius: BorderRadius.only(topLeft: Radius.zero),
+                        ),
+                      ),
+                    ),
+                    child: const Text('ODI Squad',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold))),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           const Text(
-            'T20- squad for world Cup',
+            'Pakistan cricket Players',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           Expanded(
             child: GridView.builder(
@@ -37,19 +89,35 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PlayerHistoryScreen(
-                                  playerImage: playre[index].image, playerHistory: playre[index].history,),
-                              ));
+                            builder: (context) => PlayerHistoryScreen(
+                                playerImage: playre[index].image,
+                                playerHistory: playre[index].history),
+                          ));
                     },
-                    child: Column(children: [
-                      Image.asset(
-                        playre[index].image,
-                        height: 100,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all()),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                playre[index].image,
+                                height: 100,
+                              ),
+                              Text(
+                                playre[index].name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(playre[index].role),
+                              Text(playre[index].shart.toString()),
+                            ]),
                       ),
-                      Text(playre[index].name),
-                      Text(playre[index].role),
-                      Text(playre[index].shart.toString()),
-                    ]),
+                    ),
                   );
                 }),
           ),

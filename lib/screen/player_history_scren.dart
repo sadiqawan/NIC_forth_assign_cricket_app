@@ -13,22 +13,29 @@ class PlayerHistoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Center(child: Text('History')),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 300,
-            width: double.infinity,
-            child: Image(image: playerImage),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            playerHistory,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: Image(image: AssetImage(playerImage)),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                playerHistory,
+                textAlign: TextAlign.start,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
